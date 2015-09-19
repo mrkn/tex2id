@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Tex2id do
+RSpec.describe Tex2id do
   it 'has a version number' do
     expect(Tex2id::VERSION).not_to be nil
   end
