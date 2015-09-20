@@ -49,6 +49,14 @@ module Tex2id::Converter::Constants
     'min' => '<cstyle:数式ローマン>min<cstyle:>',
   }.freeze
 
+  MACROS_IN_SUPERSCRIPT = {
+    "\\ell" => "<F060>",
+  }.freeze
+
+  SUPERSCRIPT_FONTS = {
+    /\\ell/ => [ "BKM-cmmi10", "Regular" ],
+  }.freeze
+
   CHAR_MAP = {
     "'"     => '<2032>',
     "-"     => "\u{2212}",

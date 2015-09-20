@@ -127,7 +127,7 @@ RSpec.describe Tex2id::Converter do
     end
 
     context "for source='<ParaStyle:本文>$w_{ij}^{(\\ell)}$\n'" do
-      it_converts_source_to("<ParaStyle:本文><cstyle:数式>y<cstyle:><cstyle:数式下付き><cr:1><crstr:<F060>><crfuid:BKM-cmmi10><crfs:Regular>12<cr:><crstr:><crfuid:><crfs:><cstyle:>\n")
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式>w<cstyle:><cstyle:数式下付き><cr:1><crstr:(<F060>)><crfuid:BKM-cmmi10><crfs:Regular>ij<cr:><crstr:><crfuid:><crfs:><cstyle:>\n")
     end
 
     context "for source='<ParaStyle:本文>$\\Delta E$\n'" do
