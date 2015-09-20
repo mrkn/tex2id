@@ -3,16 +3,20 @@ require 'spec_helper'
 RSpec.describe Tex2id::Converter do
   describe '#convert' do
     let(:source) do |example|
-      example.full_description[/source='((?:\\'|[^'])*)'/, 1]
+      example.full_description[/source='((?:\\'|[^'])*)'/, 1].gsub(/\\'/, "'")
     end
 
     subject(:converter) do
       Tex2id::Converter.new(source)
     end
 
+    let(:converter_output) do
+      subject.convert
+    end
+
     def self.it_converts_source_to(expected_output)
       it %Q[converts source to '#{expected_output}'] do
-        expect(subject.convert).to eq(expected_output)
+        expect(converter_output).to eq(expected_output)
       end
     end
 
@@ -45,12 +49,10 @@ RSpec.describe Tex2id::Converter do
     end
 
     context "for source='<ParaStyle:本文>$y_{12}^{3}$\n'" do
-      # TODO: need to confirm to @inao
       it_converts_source_to("<ParaStyle:本文><cstyle:数式>y<cstyle:><cstyle:数式下付き><cr:1><crstr:3>12<cr:><crstr:><cstyle:>\n")
     end
 
     context "for source='<ParaStyle:本文>$y_{12}^{(3)}$\n'" do
-      # TODO: need to confirm to @inao
       it_converts_source_to("<ParaStyle:本文><cstyle:数式>y<cstyle:><cstyle:数式下付き><cr:1><crstr:(3)>12<cr:><crstr:><cstyle:>\n")
     end
 
@@ -118,6 +120,30 @@ RSpec.describe Tex2id::Converter do
 <pstyle:半行アキ>
 <pstyle:数式><cstyle:数式>y<cstyle:> <cstyle:数式>=<cstyle:> <cstyle:数式>f(x)<cstyle:>
       END_RESULT
+    end
+
+    context "for source='<ParaStyle:本文>$-1.5$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式>\u{2212}1.5<cstyle:>\n")
+    end
+
+    context "for source='<ParaStyle:本文>$w_{ij}^{(\\ell)}$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式>y<cstyle:><cstyle:数式下付き><cr:1><crstr:<F060>><crfuid:BKM-cmmi10><crfs:Regular>12<cr:><crstr:><crfuid:><crfs:><cstyle:>\n")
+    end
+
+    context "for source='<ParaStyle:本文>$\\Delta E$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F0A2><clig:><cotfcalt:><cstyle:><cstyle:数式>E<cstyle:>\n")
+    end
+
+    context "for source='<ParaStyle:本文>$E\\'(y)$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式>E<2032>(y)<cstyle:>\n")
+    end
+
+    context "for source='<ParaStyle:本文>$\\ell{} - 1$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F060><clig:><cotfcalt:><cstyle:> <cstyle:数式>\u{2212}<cstyle:> <cstyle:数式>1<cstyle:>\n")
+    end
+
+    context "for source='<ParaStyle:本文>$\\ell\u{2212}1$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F060><clig:><cotfcalt:><cstyle:><cstyle:数式>\u{2212}1<cstyle:>\n")
     end
   end
 end

@@ -1,6 +1,12 @@
 class Tex2id::Converter
+  require 'tex2id/converter/constants'
+
+  include Constants
+
   def initialize(source)
     @source = source
+    @state_stack = []
+    @token_stack = []
   end
 
   def convert
@@ -23,97 +29,45 @@ class Tex2id::Converter
     end
   end
 
-  TOKEN_PATTERN = %r[
-    # [0] white spaces
-    (\s+)
-  |
-    # [1] macros
-    (
-      '
-    |
-      \\(?:
-        c?dots
-      | times
-      | q?quad
-      | sigma
-      | Delta
-      | varepsilon
-      | ell
-      | max
-      | min
-      )
-    )
-  |
-    # [2] roman mathop
-    \\mathop\{\\mathrm\{(\w+)\}\}
-  |
-    # [3] normal chars
-    ([a-zA-Z0-9\(\)=+]+)
-  |
-    # subscript
-    _(?:
-      ([\w\d])  # [4] single character
-     |
-      \{(
-        (?:\\\}|[^\}])+ # [5] multiple characters
-      )\}
-    )
-    (?:
-      # optional superscript
-      \^(?:
-        ([\w\d])  # [6] single character
-      |
-        \{(
-          (?:\\\}|[^\}])+ # [7] multiple characters
-        )\}
-      )
-    )?
-  |
-    # [8] superscript
-    \^([\w\d])
-  |
-    # [9] superscript
-    \^\{((?:\\\}|[^\}])+)\}
-  |
-    (.) [10] other character
-  ]x
-
-  MACROS = {
-    "'"      => '<cstyle:数式><2032><cstyle:>',
-    '\dots'  => '<cstyle:数式>...<cstyle:>',
-    '\cdots' => '<cstyle:数式><22EF><cstyle:>',
-    '\times' => '<cstyle:数式>×<cstyle:>',
-    '\quad'  => '<cstyle:数式>　<cstyle:>',
-    '\qquad' => '<cstyle:数式>　　<cstyle:>',
-    '\sigma' => '<cstyle:数式イタリック><clig:0><cotfcalt:0><F0BE><clig:><cotfcalt:><cstyle:>',
-    '\Delta' => '<cstyle:数式イタリック><clig:0><cotfcalt:0><F0A2><clig:><cotfcalt:><cstyle:>',
-    '\varepsilon' => '<cstyle:数式イタリック><clig:0><cotfcalt:0><F022><clig:><cotfcalt:><cstyle:>',
-    '\ell' => '<cstyle:数式イタリック><clig:0><cotfcalt:0><F060><clig:><cotfcalt:><cstyle:>',
-    '\max' => '<cstyle:数式ローマン>max<cstyle:>',
-    '\min' => '<cstyle:数式ローマン>min<cstyle:>',
-  }.freeze
-
   def convert_tex_source(source)
-    source.scan(TOKEN_PATTERN).map { |token|
-      if (tok = token[0])
-        tok
-      elsif (tok = token[1])
-        MACROS[tok]
-      elsif (tok = token[2])
-        "<cstyle:数式ローマン>" + tok + "<cstyle:>"
-      elsif (tok = token[3])
-        "<cstyle:数式>" + tok + "<cstyle:>"
-      elsif (tok = token[4] || token[5])
-        if (tok2 = token[6] || token[7])
-          "<cstyle:数式下付き><cr:1><crstr:#{tok2}>" + tok + "<cr:><crstr:><cstyle:>"
-        else
-          "<cstyle:数式下付き>" + tok + "<cstyle:>"
-        end
-      elsif (tok = token[8] || token[9])
-        "<cstyle:数式上付き>" + tok + "<cstyle:>"
-      else
-        token[10]
+    buf = ""
+    result = ""
+
+    source.scan(TOKEN_PATTERN) do |token|
+      if buf.length > 0 && token[9].nil?
+        result << process_normal_characters(buf)
+        buf.clear
       end
-    }.join('')
+
+      case
+      when (tok = token[0])
+        result << "<cstyle:数式ローマン>" + tok + "<cstyle:>"
+      when (tok = token[1])
+        result << MACROS[tok]
+      when (tok = token[2])
+        result << tok
+      when (tok = token[3] || token[4])
+        if (tok2 = token[5] || token[6])
+          result << "<cstyle:数式下付き><cr:1><crstr:#{tok2}>" + tok + "<cr:><crstr:><cstyle:>"
+        else
+          result << "<cstyle:数式下付き>" + tok + "<cstyle:>"
+        end
+      when (tok = token[7] || token[8])
+        result << "<cstyle:数式上付き>" + tok + "<cstyle:>"
+      when (tok = token[9])
+        buf << tok
+      end
+    end
+
+    result << process_normal_characters(buf) if buf.length > 0
+
+    result
+  end
+
+  def process_normal_characters(s)
+    s = s.gsub(CHAR_MAP_PATTERN) do |matched|
+      CHAR_MAP[matched] || matched
+    end
+    "<cstyle:数式>" + s + "<cstyle:>"
   end
 end
