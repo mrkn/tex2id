@@ -142,6 +142,10 @@ RSpec.describe Tex2id::Converter do
       it_converts_source_to("<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F060><clig:><cotfcalt:><cstyle:> <cstyle:数式>\u{2212}<cstyle:> <cstyle:数式>1<cstyle:>\n")
     end
 
+    context "for source='<ParaStyle:本文>$\\xyzzy$\n'" do
+      it_converts_source_to("<ParaStyle:本文>\\xyzzy\n")
+    end
+
     context "for source='<ParaStyle:本文>$\\ell\u{2212}1$\n'" do
       it_converts_source_to("<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F060><clig:><cotfcalt:><cstyle:><cstyle:数式>\u{2212}1<cstyle:>\n")
     end

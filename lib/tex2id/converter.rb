@@ -43,7 +43,7 @@ class Tex2id::Converter
       when (tok = token[0])
         result << "<cstyle:数式ローマン>" + tok + "<cstyle:>"
       when (tok = token[1])
-        result << MACROS[tok]
+        result << (MACROS[tok] || "\\#{tok}")
       when (tok = token[2])
         result << tok
       when (tok = token[3] || token[4])
