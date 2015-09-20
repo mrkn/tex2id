@@ -1,0 +1,5 @@
+#! /usr/bin/env ruby
+
+require 'tex2id/cli'
+
+exit Tex2id::CLI.run(ARGV)
