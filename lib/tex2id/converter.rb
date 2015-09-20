@@ -17,9 +17,14 @@ class Tex2id::Converter
 
   def convert_display_math(source)
     source.gsub(/\$\$(.*?)\$\$/m) {
-      [ "<pstyle:半行アキ>",
-        "<pstyle:数式>" + convert_tex_source($1.strip),
-      ].join("\n")
+      tex_source = $1.strip
+      if (m = /%filename:\s*(\S+)\s*\z/.match(tex_source))
+        "<CharStyle:赤字>#{m[1]}<CharStyle:>"
+      else
+        [ "<pstyle:半行アキ>",
+          "<pstyle:数式>" + convert_tex_source(tex_source),
+        ].join("\n")
+      end
     }.gsub(/<ParaStyle:本文>(<pstyle:半行アキ>)/) { $1 }
   end
 
