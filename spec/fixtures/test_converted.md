@@ -8,8 +8,8 @@
 <ParaStyle:本文><cstyle:数式>y<cstyle:><cstyle:数式上付き>1<cstyle:>
 <ParaStyle:本文><cstyle:数式>y<cstyle:><cstyle:数式上付き>12<cstyle:>
 <ParaStyle:中見出し>下付きと上付き同時
-<ParaStyle:本文><cstyle:数式>y<cstyle:><cstyle:数式下付き><cr:1><crstr:3>12<cr:><crstr:>
-<ParaStyle:本文><cstyle:数式>y<cstyle:><cstyle:数式下付き><cr:1><crstr:(3)>12<cr:><crstr:>
+<ParaStyle:本文><cstyle:数式>y<cstyle:><cstyle:数式下付き><cr:1><crstr:3>12<cr:><crstr:><cstyle:>
+<ParaStyle:本文><cstyle:数式>y<cstyle:><cstyle:数式下付き><cr:1><crstr:(3)>12<cr:><crstr:><cstyle:>
 <ParaStyle:中見出し>特殊文字
 <ParaStyle:本文><cstyle:数式>...<cstyle:>
 <ParaStyle:本文><cstyle:数式><22EF><cstyle:>

@@ -26,4 +26,4 @@
 <ParaStyle:本文>$\min$
 <ParaStyle:本文>$\mathop{\mathrm{AND}}$
 <ParaStyle:中見出し>複合例
-<ParaStyle:本文>関数は $f(u) = z_{j}^{(2)} = f(w_11 x^1 + w_{21}^{(2)} x_2 + w)$ になります。
+<ParaStyle:本文>関数は $f(u) = z_{j}^{(2)} = f(w_{11} x^1 + w_{21}^{(2)} x_2 + w)$ になります。
