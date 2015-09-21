@@ -3,8 +3,9 @@ class Tex2id::Converter
 
   include Constants
 
-  def initialize(source)
+  def initialize(source, only_fix_md2inao: false)
     @source = source
+    @only_fix_md2inao = only_fix_md2inao
     @state_stack = []
     @token_stack = []
   end
@@ -17,7 +18,9 @@ class Tex2id::Converter
 
   def convert_display_math(source)
     source.gsub(/\$\$(.*?)\$\$/m) {
-      tex_source = $1.strip
+      tex_source = fix_md2inao($1.strip)
+      next "$$" + tex_source + "$$" if @only_fix_md2inao
+
       if (m = /%filename:\s*(\S+)\s*\z/.match(tex_source))
         "<CharStyle:赤字>#{m[1]}<CharStyle:>"
       else
@@ -30,7 +33,12 @@ class Tex2id::Converter
 
   def convert_inline_math(source)
     source.gsub(/\$(.*?)\$/m) do
-      convert_tex_source($1.strip)
+      tex_source = fix_md2inao($1.strip)
+      if @only_fix_md2inao
+        "$" + tex_source + "$"
+      else
+        convert_tex_source(tex_source)
+      end
     end
   end
 
@@ -93,6 +101,13 @@ class Tex2id::Converter
       "<cstyle:数式下付き><cr:1><crstr:#{converted_superscript}><crfuid:#{superscript_font}><crfs:#{superscript_font_style}>#{subscript}<cr:><crstr:><crfuid:><crfs:><cstyle:>"
     else
       "<cstyle:数式下付き><cr:1><crstr:#{converted_superscript}>#{subscript}<cr:><crstr:><cstyle:>"
+    end
+  end
+
+  def fix_md2inao(source)
+    source.dup.tap do |s|
+      s.gsub!(/<CharStyle:(?:イタリック(?:（変形斜体）)?)?>/, '_')
+      s.gsub!(/(?:<005C>){2}/, '\\')
     end
   end
 end

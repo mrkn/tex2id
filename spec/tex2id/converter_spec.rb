@@ -153,5 +153,27 @@ RSpec.describe Tex2id::Converter do
     context "for source='<ParaStyle:本文>$$ y = \\cfrac{1}{x} %filename: X-Y-Z.pdf $$\n'" do
       it_converts_source_to("<ParaStyle:本文><CharStyle:赤字>X-Y-Z.pdf<CharStyle:>\n")
     end
+
+    context 'when call with only_fix_md2inao: true' do
+      subject(:converter) do
+        Tex2id::Converter.new(source, only_fix_md2inao: true)
+      end
+
+      context "for source='<CharStyle:>$<CharStyle:>$'" do
+        it_converts_source_to("<CharStyle:>$_$")
+      end
+
+      context "for source='<CharStyle:イタリック>$<CharStyle:イタリック>$'" do
+        it_converts_source_to("<CharStyle:イタリック>$_$")
+      end
+
+      context "for source='<CharStyle:イタリック（変形斜体）>$<CharStyle:イタリック（変形斜体）>$'" do
+        it_converts_source_to("<CharStyle:イタリック（変形斜体）>$_$")
+      end
+
+      context "for source='<005C><005C>$<005C><005C>$'" do
+        it_converts_source_to("<005C><005C>$\\$")
+      end
+    end
   end
 end
