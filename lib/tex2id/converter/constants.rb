@@ -41,20 +41,16 @@ module Tex2id::Converter::Constants
     'times' => '<cstyle:数式>×<cstyle:>',
     'quad'  => '<cstyle:数式>　<cstyle:>',
     'qquad' => '<cstyle:数式>　　<cstyle:>',
-    'sigma' => '<cstyle:数式イタリック><clig:0><cotfcalt:0><F0BE><clig:><cotfcalt:><cstyle:>',
-    'Delta' => '<cstyle:数式イタリック><clig:0><cotfcalt:0><F0A2><clig:><cotfcalt:><cstyle:>',
-    'varepsilon' => '<cstyle:数式イタリック><clig:0><cotfcalt:0><F022><clig:><cotfcalt:><cstyle:>',
-    'ell' => '<cstyle:数式イタリック><clig:0><cotfcalt:0><F060><clig:><cotfcalt:><cstyle:>',
+    'sigma' => '<cstyle:数式><F0BE><cstyle:>',
+    'Delta' => '<cstyle:数式><F0A2><cstyle:>',
+    'varepsilon' => '<cstyle:数式><F022><cstyle:>',
+    'ell' => '<cstyle:数式><F060><cstyle:>',
     'max' => '<cstyle:数式ローマン>max<cstyle:>',
     'min' => '<cstyle:数式ローマン>min<cstyle:>',
   }.freeze
 
   MACROS_IN_SUPERSCRIPT = {
     "\\ell" => "<F060>",
-  }.freeze
-
-  SUPERSCRIPT_FONTS = {
-    /\\ell/ => [ "BKM-cmmi10", "Regular" ],
   }.freeze
 
   CHAR_MAP = {

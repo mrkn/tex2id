@@ -77,19 +77,19 @@ RSpec.describe Tex2id::Converter do
     end
 
     context "for source='<ParaStyle:本文>$\\sigma$\n'" do
-      it_converts_source_to("<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F0BE><clig:><cotfcalt:><cstyle:>\n")
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式><F0BE><cstyle:>\n")
     end
 
     context "for source='<ParaStyle:本文>$\\Delta$\n'" do
-      it_converts_source_to("<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F0A2><clig:><cotfcalt:><cstyle:>\n")
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式><F0A2><cstyle:>\n")
     end
 
     context "for source='<ParaStyle:本文>$\\varepsilon$\n'" do
-      it_converts_source_to("<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F022><clig:><cotfcalt:><cstyle:>\n")
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式><F022><cstyle:>\n")
     end
 
     context "for source='<ParaStyle:本文>$\\ell$\n'" do
-      it_converts_source_to("<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F060><clig:><cotfcalt:><cstyle:>\n")
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式><F060><cstyle:>\n")
     end
 
     context "for source='<ParaStyle:本文>$\\max$\n'" do
@@ -127,11 +127,11 @@ RSpec.describe Tex2id::Converter do
     end
 
     context "for source='<ParaStyle:本文>$w_{ij}^{(\\ell)}$\n'" do
-      it_converts_source_to("<ParaStyle:本文><cstyle:数式>w<cstyle:><cstyle:数式下付き><cr:1><crstr:(<F060>)><crfuid:BKM-cmmi10><crfs:Regular>ij<cr:><crstr:><crfuid:><crfs:><cstyle:>\n")
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式>w<cstyle:><cstyle:数式下付き><cr:1><crstr:(<F060>)>ij<cr:><crstr:><cstyle:>\n")
     end
 
     context "for source='<ParaStyle:本文>$\\Delta E$\n'" do
-      it_converts_source_to("<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F0A2><clig:><cotfcalt:><cstyle:><cstyle:数式>E<cstyle:>\n")
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式><F0A2><cstyle:><cstyle:数式>E<cstyle:>\n")
     end
 
     context "for source='<ParaStyle:本文>$E\\'(y)$\n'" do
@@ -139,7 +139,7 @@ RSpec.describe Tex2id::Converter do
     end
 
     context "for source='<ParaStyle:本文>$\\ell{} - 1$\n'" do
-      it_converts_source_to("<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F060><clig:><cotfcalt:><cstyle:> <cstyle:数式>\u{2212}<cstyle:> <cstyle:数式>1<cstyle:>\n")
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式><F060><cstyle:> <cstyle:数式>\u{2212}<cstyle:> <cstyle:数式>1<cstyle:>\n")
     end
 
     context "for source='<ParaStyle:本文>$\\xyzzy$\n'" do
@@ -147,7 +147,7 @@ RSpec.describe Tex2id::Converter do
     end
 
     context "for source='<ParaStyle:本文>$\\ell\u{2212}1$\n'" do
-      it_converts_source_to("<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F060><clig:><cotfcalt:><cstyle:><cstyle:数式>\u{2212}1<cstyle:>\n")
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式><F060><cstyle:><cstyle:数式>\u{2212}1<cstyle:>\n")
     end
 
     context "for source='<ParaStyle:本文>$$ y = \\cfrac{1}{x} %filename: X-Y-Z.pdf $$\n'" do

@@ -85,23 +85,11 @@ class Tex2id::Converter
   end
 
   def process_superscript_on_subscript(superscript, subscript)
-    superscript_font, superscript_font_style = nil, nil
-    SUPERSCRIPT_FONTS.each do |pattern, (font, font_style)|
-      if pattern === superscript
-        superscript_font = font
-        superscript_font_style = font_style
-        break
-      end
-    end
     converted_superscript = superscript.dup
     MACROS_IN_SUPERSCRIPT.each do |key, value|
       converted_superscript.gsub!(key, value)
     end
-    if superscript_font && superscript_font_style
-      "<cstyle:数式下付き><cr:1><crstr:#{converted_superscript}><crfuid:#{superscript_font}><crfs:#{superscript_font_style}>#{subscript}<cr:><crstr:><crfuid:><crfs:><cstyle:>"
-    else
-      "<cstyle:数式下付き><cr:1><crstr:#{converted_superscript}>#{subscript}<cr:><crstr:><cstyle:>"
-    end
+    "<cstyle:数式下付き><cr:1><crstr:#{converted_superscript}>#{subscript}<cr:><crstr:><cstyle:>"
   end
 
   def fix_md2inao(source)

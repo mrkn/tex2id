@@ -17,10 +17,10 @@
 <ParaStyle:本文><cstyle:数式>　<cstyle:>
 <ParaStyle:本文><cstyle:数式><2032><cstyle:>
 <ParaStyle:中見出し>特殊文字（MATHEMATICAL）
-<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F0BE><clig:><cotfcalt:><cstyle:>
-<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F0A2><clig:><cotfcalt:><cstyle:>
-<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F022><clig:><cotfcalt:><cstyle:>
-<ParaStyle:本文><cstyle:数式イタリック><clig:0><cotfcalt:0><F060><clig:><cotfcalt:><cstyle:>
+<ParaStyle:本文><cstyle:数式><F0BE><cstyle:>
+<ParaStyle:本文><cstyle:数式><F0A2><cstyle:>
+<ParaStyle:本文><cstyle:数式><F022><cstyle:>
+<ParaStyle:本文><cstyle:数式><F060><cstyle:>
 <ParaStyle:中見出し>ローマン体
 <ParaStyle:本文><cstyle:数式ローマン>max<cstyle:>
 <ParaStyle:本文><cstyle:数式ローマン>min<cstyle:>
