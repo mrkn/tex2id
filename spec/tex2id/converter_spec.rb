@@ -84,6 +84,10 @@ RSpec.describe Tex2id::Converter do
       it_converts_source_to("<ParaStyle:本文><cstyle:数式><F0A2><cstyle:>\n")
     end
 
+    context "for source='<ParaStyle:本文>$\\Theta$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式><F0A3><cstyle:>\n")
+    end
+
     context "for source='<ParaStyle:本文>$\\varepsilon$\n'" do
       it_converts_source_to("<ParaStyle:本文><cstyle:数式><F022><cstyle:>\n")
     end

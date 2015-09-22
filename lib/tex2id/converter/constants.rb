@@ -43,6 +43,7 @@ module Tex2id::Converter::Constants
     'qquad' => '<cstyle:数式>　　<cstyle:>',
     'sigma' => '<cstyle:数式><F0BE><cstyle:>',
     'Delta' => '<cstyle:数式><F0A2><cstyle:>',
+    'Theta' => '<cstyle:数式><F0A3><cstyle:>',
     'varepsilon' => '<cstyle:数式><F022><cstyle:>',
     'ell' => '<cstyle:数式><F060><cstyle:>',
     'max' => '<cstyle:数式ローマン>max<cstyle:>',
