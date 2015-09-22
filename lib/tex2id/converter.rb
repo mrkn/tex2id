@@ -32,14 +32,32 @@ class Tex2id::Converter
   end
 
   def convert_inline_math(source)
-    source.gsub(/\$(.*?)\$/m) do
-      tex_source = fix_md2inao($1.strip)
-      if @only_fix_md2inao
-        "$" + tex_source + "$"
+    source.each_line.map { |line|
+      case line
+      when /\A<ParaStyle:リスト>/,
+           /\A<ParaStyle:リスト白文字>/
+        # do nothing
       else
-        convert_tex_source(tex_source)
+        inline_commands = []
+        line.gsub!(/<CharStyle:コマンド>[^<]+<CharStyle:>/) do |matched|
+          id = inline_commands.length
+          inline_commands << matched
+          "<tex2id_inline_commands[#{id}]>"
+        end
+        line.gsub!(/\$(.*?)\$/) do
+          tex_source = fix_md2inao($1.strip)
+          if @only_fix_md2inao
+            "$" + tex_source + "$"
+          else
+            convert_tex_source(tex_source)
+          end
+        end
+        line.gsub!(/<tex2id_inline_commands\[(\d+)\]>/) do
+          inline_commands[$1.to_i]
+        end
       end
-    end
+      line
+    }.join('')
   end
 
   def convert_tex_source(source)
