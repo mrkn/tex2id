@@ -151,7 +151,7 @@ RSpec.describe Tex2id::Converter do
     end
 
     context "for source='<ParaStyle:本文>$$ y = \\cfrac{1}{x} %filename: X-Y-Z.pdf $$\n'" do
-      it_converts_source_to("<ParaStyle:本文><CharStyle:赤字>X-Y-Z.pdf<CharStyle:>\n")
+      it_converts_source_to("<ParaStyle:本文><CharStyle:赤字>画像にサシカエ。X-Y-Z.pdf<CharStyle:>\n")
     end
 
     context 'when call with only_fix_md2inao: true' do
