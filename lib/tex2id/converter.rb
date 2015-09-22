@@ -22,7 +22,7 @@ class Tex2id::Converter
       next "$$" + tex_source + "$$" if @only_fix_md2inao
 
       if (m = /%filename:\s*(\S+)\s*\z/.match(tex_source))
-        "<CharStyle:赤字>画像にサシカエ。#{m[1]}<CharStyle:>"
+        "<CharStyle:赤字>画像を挿入：#{m[1]}<CharStyle:>"
       else
         [ "<pstyle:半行アキ>",
           "<pstyle:数式>" + convert_tex_source(tex_source),
