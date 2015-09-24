@@ -32,7 +32,9 @@ module Tex2id::Converter::Constants
       ([^{])                  # [8] single character superscript
     )
   |
-    (.+?)                     # [9] other characters
+    (\')                      # [9] prime
+  |
+    (.+?)                     # [10] other characters
   ]mx
 
   MACROS = {
@@ -55,7 +57,7 @@ module Tex2id::Converter::Constants
   }.freeze
 
   CHAR_MAP = {
-    "'"     => '<2032>',
+    "'"     => '<F030>',
     "-"     => "\u{2212}",
   }.freeze
 

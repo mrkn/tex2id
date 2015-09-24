@@ -15,7 +15,7 @@
 <ParaStyle:本文><cstyle:数式><22EF><cstyle:>
 <ParaStyle:本文><cstyle:数式>×<cstyle:>
 <ParaStyle:本文><cstyle:数式>　<cstyle:>
-<ParaStyle:本文><cstyle:数式><2032><cstyle:>
+<ParaStyle:本文><cstyle:数式上付き><F030><cstyle:>
 <ParaStyle:中見出し>特殊文字（MATHEMATICAL）
 <ParaStyle:本文><cstyle:数式><F0BE><cstyle:>
 <ParaStyle:本文><cstyle:数式><F0A2><cstyle:>

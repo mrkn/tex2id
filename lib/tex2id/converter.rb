@@ -65,7 +65,7 @@ class Tex2id::Converter
     result = ""
 
     source.scan(TOKEN_PATTERN) do |token|
-      if buf.length > 0 && token[9].nil?
+      if buf.length > 0 && token[10].nil?
         result << process_normal_characters(buf)
         buf.clear
       end
@@ -83,9 +83,9 @@ class Tex2id::Converter
         else
           result << "<cstyle:数式下付き>" + tok + "<cstyle:>"
         end
-      when (tok = token[7] || token[8])
-        result << "<cstyle:数式上付き>" + tok + "<cstyle:>"
-      when (tok = token[9])
+      when (tok = token[7] || token[8] || token[9])
+        result << "<cstyle:数式上付き>" + apply_char_map(tok) + "<cstyle:>"
+      when (tok = token[10])
         buf << tok
       end
     end
@@ -95,10 +95,14 @@ class Tex2id::Converter
     result
   end
 
-  def process_normal_characters(s)
+  def apply_char_map(s)
     s = s.gsub(CHAR_MAP_PATTERN) do |matched|
       CHAR_MAP[matched] || matched
     end
+  end
+
+  def process_normal_characters(s)
+    s = apply_char_map(s)
     "<cstyle:数式>" + s + "<cstyle:>"
   end
 
