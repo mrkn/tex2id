@@ -34,7 +34,7 @@ module Tex2id::Converter::Constants
   |
     (\')                      # [9] prime
   |
-    (-\d+(?:\.\d+)?)          # [10] numbers
+    ([-+](?:\d+(?:\.\d+)?|\\infty)) # [10] numbers
   |
     (.+?)                     # [11] other characters
   ]mx

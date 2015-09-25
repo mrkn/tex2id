@@ -96,8 +96,12 @@ RSpec.describe Tex2id::Converter do
       it_converts_source_to("<ParaStyle:本文><cstyle:数式><F060><cstyle:>\n")
     end
 
-    context "for source='<ParaStyle:本文>$\\infty$\n'" do
-      it_converts_source_to("<ParaStyle:本文><cstyle:数式><F031><cstyle:>\n")
+    context "for source='<ParaStyle:本文>$-\\infty$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式><ctk:-300>\u{2212}<ctk:><F031><cstyle:>\n")
+    end
+
+    context "for source='<ParaStyle:本文>$+\\infty$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式>+<F031><cstyle:>\n")
     end
 
     context "for source='<ParaStyle:本文>$\\max$\n'" do

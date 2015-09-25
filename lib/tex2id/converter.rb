@@ -74,7 +74,7 @@ class Tex2id::Converter
       when (tok = token[0])
         result << "<cstyle:数式ローマン>" + tok + "<cstyle:>"
       when (tok = token[1])
-        result << (MACROS[tok] || "\\#{tok}")
+        result << process_macros(tok)
       when (tok = token[2])
         result << tok
       when (tok = token[3] || token[4])
@@ -116,10 +116,16 @@ class Tex2id::Converter
     "<cstyle:数式下付き><cr:1><crstr:#{converted_superscript}>#{subscript}<cr:><crstr:><cstyle:>"
   end
 
+  def process_macros(s)
+    MACROS[s] || "\\#{s}"
+  end
+
   def process_number(s)
     if s[0] == '-'
       s[0,1] = "<ctk:-300>\u{2212}<ctk:>"
     end
+    # TODO: generalize the following
+    s.gsub!(/\\infty/) {|x| '<F031>' }
     "<cstyle:数式>#{s}<cstyle:>"
   end
 
