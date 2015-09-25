@@ -34,7 +34,9 @@ module Tex2id::Converter::Constants
   |
     (\')                      # [9] prime
   |
-    (.+?)                     # [10] other characters
+    (-\d+(?:\.\d+)?)          # [10] numbers
+  |
+    (.+?)                     # [11] other characters
   ]mx
 
   MACROS = {

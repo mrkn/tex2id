@@ -65,7 +65,7 @@ class Tex2id::Converter
     result = ""
 
     source.scan(TOKEN_PATTERN) do |token|
-      if buf.length > 0 && token[10].nil?
+      if buf.length > 0 && token[11].nil?
         result << process_normal_characters(buf)
         buf.clear
       end
@@ -86,6 +86,8 @@ class Tex2id::Converter
       when (tok = token[7] || token[8] || token[9])
         result << "<cstyle:数式上付き>" + apply_char_map(tok) + "<cstyle:>"
       when (tok = token[10])
+        result << process_number(tok)
+      when (tok = token[11])
         buf << tok
       end
     end
@@ -112,6 +114,13 @@ class Tex2id::Converter
       converted_superscript.gsub!(key, value)
     end
     "<cstyle:数式下付き><cr:1><crstr:#{converted_superscript}>#{subscript}<cr:><crstr:><cstyle:>"
+  end
+
+  def process_number(s)
+    if s[0] == '-'
+      s[0,1] = "<ctk:-300>\u{2212}<ctk:>"
+    end
+    "<cstyle:数式>#{s}<cstyle:>"
   end
 
   def fix_md2inao(source)

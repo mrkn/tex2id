@@ -108,6 +108,10 @@ RSpec.describe Tex2id::Converter do
       it_converts_source_to("<ParaStyle:本文><cstyle:数式ローマン>AND<cstyle:>\n")
     end
 
+    context "for source='<ParaStyle:本文>$w_3z_3$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式>w<cstyle:><cstyle:数式下付き>3<cstyle:><cstyle:数式>z<cstyle:><cstyle:数式下付き>3<cstyle:>\n")
+    end
+
     context "for source='<ParaStyle:本文>関数は $f(u) = z_{j}^{(2)} = f(w_{11} x^1 + w_{21}^{(2)} x_2 + w)$ になります。\n'" do
       it_converts_source_to("<ParaStyle:本文>関数は <cstyle:数式>f(u)<cstyle:> <cstyle:数式>=<cstyle:> <cstyle:数式>z<cstyle:><cstyle:数式下付き><cr:1><crstr:(2)>j<cr:><crstr:><cstyle:> <cstyle:数式>=<cstyle:> <cstyle:数式>f(w<cstyle:><cstyle:数式下付き>11<cstyle:> <cstyle:数式>x<cstyle:><cstyle:数式上付き>1<cstyle:> <cstyle:数式>+<cstyle:> <cstyle:数式>w<cstyle:><cstyle:数式下付き><cr:1><crstr:(2)>21<cr:><crstr:><cstyle:> <cstyle:数式>x<cstyle:><cstyle:数式下付き>2<cstyle:> <cstyle:数式>+<cstyle:> <cstyle:数式>w)<cstyle:> になります。\n")
     end
@@ -127,7 +131,7 @@ RSpec.describe Tex2id::Converter do
     end
 
     context "for source='<ParaStyle:本文>$-1.5$\n'" do
-      it_converts_source_to("<ParaStyle:本文><cstyle:数式>\u{2212}1.5<cstyle:>\n")
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式><ctk:-300>\u{2212}<ctk:>1.5<cstyle:>\n")
     end
 
     context "for source='<ParaStyle:本文>$w_{ij}^{(\\ell)}$\n'" do
