@@ -18,7 +18,7 @@
 <ParaStyle:本文><cstyle:数式上付き><F030><cstyle:>
 <ParaStyle:中見出し>特殊文字（MATHEMATICAL）
 <ParaStyle:本文><cstyle:数式><F0BE><cstyle:>
-<ParaStyle:本文><cstyle:数式><F0A2><cstyle:>
+<ParaStyle:本文><cstyle:数式><ctk:-250><F0A2><ctk:><cstyle:>
 <ParaStyle:本文><cstyle:数式><F022><cstyle:>
 <ParaStyle:本文><cstyle:数式><F060><cstyle:>
 <ParaStyle:中見出し>ローマン体
