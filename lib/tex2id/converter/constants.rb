@@ -60,7 +60,7 @@ module Tex2id::Converter::Constants
   }.freeze
 
   CHAR_MAP = {
-    "'"     => '<F030>',
+    "'"     => '<ctk:-300><F030><ctk:>',
     "-"     => "\u{2212}",
   }.freeze
 
