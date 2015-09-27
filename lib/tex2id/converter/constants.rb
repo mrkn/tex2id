@@ -46,7 +46,7 @@ module Tex2id::Converter::Constants
     'quad'  => '<cstyle:数式>　<cstyle:>',
     'qquad' => '<cstyle:数式>　　<cstyle:>',
     'sigma' => '<cstyle:数式><F0BE><cstyle:>',
-    'Delta' => '<cstyle:数式><ctk:-250><F0A2><ctk:><cstyle:>',
+    'Delta' => '<cstyle:数式><ctk:-150><F0A2><ctk:><cstyle:>',
     'Theta' => '<cstyle:数式><F0A3><cstyle:>',
     'varepsilon' => '<cstyle:数式><F022><cstyle:>',
     'ell' => '<cstyle:数式><F060><cstyle:>',
