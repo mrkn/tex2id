@@ -121,11 +121,12 @@ class Tex2id::Converter
   end
 
   def process_number(s)
-    if s[0] == '-'
+    # TODO: generalize the following
+    s.gsub!(/[-\u{2212}]\\infty/) {|x| "<ctk:-150>\u{2212}<ctk:><F031>" }
+    s.gsub!(/\\infty/) {|x| '<F031>' }
+    if s[0] == '-' || s[0] == "\u{2212}"
       s[0,1] = "<ctk:-300>\u{2212}<ctk:>"
     end
-    # TODO: generalize the following
-    s.gsub!(/\\infty/) {|x| '<F031>' }
     "<cstyle:数式>#{s}<cstyle:>"
   end
 
