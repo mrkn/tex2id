@@ -150,6 +150,14 @@ RSpec.describe Tex2id::Converter do
       it_converts_source_to("<ParaStyle:本文><cstyle:数式><ctk:-150><F0A2><ctk:><cstyle:><cstyle:数式>E<cstyle:>\n")
     end
 
+    context "for source='<ParaStyle:本文>$\\theta_0$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式><03B8><cstyle:><cstyle:数式下付き>0<cstyle:>\n")
+    end
+
+    context "for source='<ParaStyle:本文>$h_\\theta(x)$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式>h<cstyle:><cstyle:数式下付き><cstyle:数式><03B8><cstyle:><cstyle:><cstyle:数式>(x)<cstyle:>\n")
+    end
+
     context "for source='<ParaStyle:本文>$E\\'(y)$\n'" do
       it_converts_source_to("<ParaStyle:本文><cstyle:数式>E<cstyle:><cstyle:数式上付き><ctk:-300><F030><ctk:><cstyle:><cstyle:数式>(y)<cstyle:>\n")
     end

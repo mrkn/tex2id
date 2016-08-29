@@ -3,40 +3,42 @@ module Tex2id::Converter::Constants
     \\mathop\{\\mathrm\{([A-Za-z0-9]+)\}\}
                               # [0] roman mathop
   |
-    \\(\w+)(?:\s|\{\})?       # [1] macros
+    \\([a-zA-Z]+)(?:\s|\{\})? # [1] macros
   |
     (\s+)                     # [2] whitespaces
   |
     _(?:
-      ([\w\d])                # [3] single character superscript
+      ([\w\d])                # [3] single character subscript
      |
       \{(
-        (?:\\\}|[^\}])+       # [4] multiple characters superscript
+        (?:\\\}|[^\}])+       # [4] multiple characters subscript
       )\}
+    |
+      \\([a-zA-Z]+)           # [5] single macro superscript
     )
     (?:
       \^(?:
         \{(
-          (?:\\\}|[^\}])+     # [5] multiple characters superscript
+          (?:\\\}|[^\}])+     # [6] multiple characters superscript
         )\}
       |
-        ([^{])                # [6] single character superscript
+        ([^{])                # [7] single character superscript
       )
     )?
   |
     \^(?:
       \{(
-        (?:\\\}|[^\}])+       # [7] multiple characters superscript
+        (?:\\\}|[^\}])+       # [8] multiple characters superscript
       )\}
     |
-      ([^{])                  # [8] single character superscript
+      ([^{])                  # [9] single character superscript
     )
   |
-    (\')                      # [9] prime
+    (\')                      # [10] prime
   |
-    ([-+](?:\d+(?:\.\d+)?|\\infty)) # [10] numbers
+    ([-+](?:\d+(?:\.\d+)?|\\infty)) # [11] numbers
   |
-    (.+?)                     # [11] other characters
+    (.+?)                     # [12] other characters
   ]mx
 
   MACROS = {
@@ -45,6 +47,8 @@ module Tex2id::Converter::Constants
     'times' => '<cstyle:数式>×<cstyle:>',
     'quad'  => '<cstyle:数式>　<cstyle:>',
     'qquad' => '<cstyle:数式>　　<cstyle:>',
+    'alpha' => '<cstyle:数式><03B1><cstyle:>',
+    'theta' => '<cstyle:数式><03B8><cstyle:>',
     'sigma' => '<cstyle:数式><F0BE><cstyle:>',
     'Delta' => '<cstyle:数式><ctk:-150><F0A2><ctk:><cstyle:>',
     'Theta' => '<cstyle:数式><F0A3><cstyle:>',
