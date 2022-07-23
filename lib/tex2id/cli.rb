@@ -53,7 +53,7 @@ Usage: #{$0} <source_file> [<output_file>]
       end
       yield io
     ensure
-      io.close
+      io.close if output_file
     end
   end
 
