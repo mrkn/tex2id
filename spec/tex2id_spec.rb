@@ -11,7 +11,7 @@ RSpec.describe Tex2id do
     end
 
     let(:expected_output) do
-      IO.read(fixture_path('test_converted.md'), mode: 'r:UTF-8')
+      IO.read(fixture_path('test_converted.md'), mode: 'r:Windows-31J:UTF-8')
     end
 
     it 'converts TeX notation into InDesign notation' do

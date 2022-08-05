@@ -19,7 +19,7 @@ class Tex2id::Converter
   def convert_display_math(source)
     source.gsub(/\$\$(.*?)\$\$/m) {
       tex_source = fix_md2inao($1.strip)
-      next "$$" + tex_source + "$$" if @only_fix_md2inao
+      next "$$#{tex_source}$$" if @only_fix_md2inao
 
       if (m = /%filename:\s*(\S+)\s*\z/.match(tex_source))
         "<CharStyle:赤字>画像を挿入：#{m[1]}<CharStyle:>"

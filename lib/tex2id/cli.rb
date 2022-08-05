@@ -41,13 +41,13 @@ Usage: #{$0} <source_file> [<output_file>]
   end
 
   def source
-    IO.read(source_file, mode: 'r:UTF-8')
+    IO.read(source_file, mode: 'r:Windows-31J:UTF-8')
   end
 
   def with_output_file_io
     begin
       io = if output_file
-        File.open(output_file, 'w:UTF-8')
+        File.open(output_file, 'w:Windows-31J:UTF-8')
       else
         $stdout
       end
