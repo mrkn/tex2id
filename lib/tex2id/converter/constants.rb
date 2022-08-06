@@ -45,6 +45,7 @@ module Tex2id::Converter::Constants
     'dots'  => '<cstyle:数式>...<cstyle:>',
     'cdots' => '<cstyle:数式><22EF><cstyle:>',
     'times' => '<cstyle:数式>×<cstyle:>',
+    'div'   => '<cstyle:数式>÷<cstyle:>',
     'quad'  => '<cstyle:数式>　<cstyle:>',
     'qquad' => '<cstyle:数式>　　<cstyle:>',
     'alpha' => '<cstyle:数式><03B1><cstyle:>',

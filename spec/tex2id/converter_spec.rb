@@ -98,6 +98,10 @@ RSpec.describe Tex2id::Converter do
       it_converts_source_to("<ParaStyle:本文><cstyle:数式>×<cstyle:>\n")
     end
 
+    context "for source='<ParaStyle:本文>$\\div$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式>÷<cstyle:>\n")
+    end
+
     context "for source='<ParaStyle:本文>$\\quad$\n'" do
       it_converts_source_to("<ParaStyle:本文><cstyle:数式>　<cstyle:>\n")
     end
