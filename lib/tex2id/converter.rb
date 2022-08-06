@@ -5,13 +5,32 @@ class Tex2id::Converter
 
   def initialize(source, only_fix_md2inao: false)
     @source = source
+    @use_math = false
     @only_fix_md2inao = only_fix_md2inao
     @state_stack = []
     @token_stack = []
   end
 
+  def use_math? = @use_math
+
   def convert
-    pass1 = convert_display_math(@source)
+    pass1 = check_use_math(@source)
+    if use_math?
+      convert_math(pass1)
+    else
+      pass1
+    end
+  end
+
+  def check_use_math(source)
+    source.sub(/\bUseMath:\s+(true|false)\b/m) {
+      @use_math = (Regexp.last_match[1] == "true")
+      ""
+    }
+  end
+
+  def convert_math(source)
+    pass1 = convert_display_math(source)
     pass2 = convert_inline_math(pass1)
     pass2
   end

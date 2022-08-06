@@ -1,5 +1,5 @@
 <SJIS-MAC>
-<ParaStyle:本文>UseMath: true
+<ParaStyle:本文>UseMath: false
 <ParaStyle:中見出し>基本
 <ParaStyle:本文>$y$
 <ParaStyle:中見出し>下付き
