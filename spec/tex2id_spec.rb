@@ -12,7 +12,7 @@ RSpec.describe Tex2id do
       end
 
       let(:expected_output) do
-        IO.read(fixture_path('test_converted.md'), mode: 'r:Windows-31J:UTF-8')
+        IO.read(fixture_path('test_converted.md'), mode: 'r')
       end
 
       it 'converts TeX notation into InDesign notation' do
@@ -26,7 +26,7 @@ RSpec.describe Tex2id do
       end
 
       let(:expected_output) do
-        IO.read(fixture_path('test_unconverted.md'), mode: 'r:Windows-31J:UTF-8')
+        IO.read(fixture_path('test_unconverted.md'), mode: 'r')
       end
 
       it 'does not convert TeX notation into InDesign notation' do
@@ -40,7 +40,7 @@ RSpec.describe Tex2id do
       end
 
       let(:expected_output) do
-        IO.read(fixture_path('test_unconverted.md'), mode: 'r:Windows-31J:UTF-8')
+        IO.read(fixture_path('test_unconverted.md'), mode: 'r')
       end
 
       it 'does not convert TeX notation into InDesign notation' do

@@ -43,27 +43,22 @@ Usage: #{$0} <source_file> [<output_file>]
   def source
     case source_file
     when "-"
-      $stdin.set_encoding("Windows-31J:UTF-8")
       $stdin.read
     else
-      IO.read(source_file, mode: 'r:Windows-31J:UTF-8')
+      IO.read(source_file, mode: 'r')
     end
   end
 
   def with_output_file_io
     begin
       io = if output_file
-        File.open(output_file, 'w:Windows-31J:UTF-8')
+        File.open(output_file, 'w')
       else
-        $stdout.set_encoding("Windows-31J")
+        $stdout
       end
       yield io
     ensure
-      if output_file
-        io.close
-      else
-        $stdout.set_encoding("UTF-8")
-      end
+      io.close if output_file
     end
   end
 
