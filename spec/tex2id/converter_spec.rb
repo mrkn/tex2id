@@ -98,6 +98,10 @@ RSpec.describe Tex2id::Converter do
       it_converts_source_to("<ParaStyle:本文><cstyle:数式>×<cstyle:>\n")
     end
 
+    context "for source='<ParaStyle:本文>$\\div$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式>÷<cstyle:>\n")
+    end
+
     context "for source='<ParaStyle:本文>$\\quad$\n'" do
       it_converts_source_to("<ParaStyle:本文><cstyle:数式>　<cstyle:>\n")
     end
@@ -223,6 +227,11 @@ RSpec.describe Tex2id::Converter do
     context "for source='<ParaStyle:リスト白文字>$y_{12}$\n'" do
       it_converts_source_to("<ParaStyle:リスト白文字>$y_{12}$\n")
     end
+
+    context "for source='<ParaStyle:本文><CharStyle:コード（文字単位）>$y_{12}$<CharStyle:>\n'" do
+      it_converts_source_to("<ParaStyle:本文><CharStyle:コード（文字単位）>$y_{12}$<CharStyle:>\n")
+    end
+
 
     context 'when call with only_fix_md2inao: true' do
       subject(:converter) do

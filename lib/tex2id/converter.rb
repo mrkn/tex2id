@@ -58,7 +58,7 @@ class Tex2id::Converter
         # do nothing
       else
         inline_commands = []
-        line.gsub!(/<CharStyle:コマンド>[^<]+<CharStyle:>/) do |matched|
+        line.gsub!(/<CharStyle:(?:コマンド|コード（文字単位）)>[^<]+<CharStyle:>/) do |matched|
           id = inline_commands.length
           inline_commands << matched
           "<tex2id_inline_commands[#{id}]>"
