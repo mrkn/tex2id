@@ -224,6 +224,11 @@ RSpec.describe Tex2id::Converter do
       it_converts_source_to("<ParaStyle:リスト白文字>$y_{12}$\n")
     end
 
+    context "for source='<ParaStyle:本文><CharStyle:コード（文字単位）>$y_{12}$<CharStyle:>\n'" do
+      it_converts_source_to("<ParaStyle:本文><CharStyle:コード（文字単位）>$y_{12}$<CharStyle:>\n")
+    end
+
+
     context 'when call with only_fix_md2inao: true' do
       subject(:converter) do
         Tex2id::Converter.new(source, only_fix_md2inao: true)
