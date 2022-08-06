@@ -11,14 +11,14 @@ RSpec.describe "UseMath support" do
   end
 
   let(:expected_result) do
-    File.read(fixture_path("test_converted.md"), mode: "r:Windows-31J")
+    File.read(fixture_path("test_converted.md"), mode: "r")
   end
 
   specify "reading input file from stdin when input filename is '-'" do
-    open(fixture_path("test_source.md"), "r:Windows-31J") do |input|
+    open(fixture_path("test_source.md"), "r") do |input|
       IO.popen(
         [RbConfig.ruby, "-I#{libdir}", tex2id_path, "-"],
-        mode: "r+:Windows-31J",
+        mode: "r+",
       ) do |tex2id_io|
         IO.copy_stream(input, tex2id_io)
         tex2id_io.close_write
