@@ -1,23 +1,53 @@
 require 'spec_helper'
 
 RSpec.describe Tex2id::Converter do
+  let(:source) do |example|
+    example.full_description[/source='((?:\\'|[^'])*)'/, 1].gsub(/\\'/, "'")
+  end
+
+  subject(:converter) do
+    Tex2id::Converter.new(source)
+  end
+
+  def self.it_converts_source_to(expected_output)
+    it %Q[converts source to '#{expected_output}'] do
+      expect(converter_output).to eq(expected_output)
+    end
+  end
+
   describe '#convert' do
-    let(:source) do |example|
-      example.full_description[/source='((?:\\'|[^'])*)'/, 1].gsub(/\\'/, "'")
-    end
-
-    subject(:converter) do
-      Tex2id::Converter.new(source)
-    end
-
     let(:converter_output) do
       subject.convert
     end
 
-    def self.it_converts_source_to(expected_output)
-      it %Q[converts source to '#{expected_output}'] do
-        expect(converter_output).to eq(expected_output)
-      end
+    context "for source='<SJIS-MAC>\n'" do
+      it_converts_source_to("<SJIS-MAC>\n")
+    end
+
+    context "for source='<ParaStyle:本文>UseMath:  true\n'" do
+      it_converts_source_to("<ParaStyle:本文>\n")
+    end
+
+    context "for source='<ParaStyle:本文>UseMath:  false\n'" do
+      it_converts_source_to("<ParaStyle:本文>\n")
+    end
+
+    context "for source='UseMath: true<ParaStyle:本文>$y$\n'" do
+      it_converts_source_to("<ParaStyle:本文><cstyle:数式>y<cstyle:>\n")
+    end
+
+    context "for source='UseMath: false<ParaStyle:本文>$y$\n'" do
+      it_converts_source_to("<ParaStyle:本文>$y$\n")
+    end
+
+    context "for source='<ParaStyle:本文>$y$\n'" do
+      it_converts_source_to("<ParaStyle:本文>$y$\n")
+    end
+  end
+
+  describe '#convert_math' do
+    let(:converter_output) do
+      subject.convert_math(source)
     end
 
     context "for source='<SJIS-MAC>\n'" do
